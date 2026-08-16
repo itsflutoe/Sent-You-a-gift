@@ -12,10 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Soft gradient background -->
   <div class="bg"></div>
 
-  <!-- iPhone-style Notification Banner -->
+  <!-- iPhone-style Notification -->
   <div id="notification" class="notification">
     <div class="notif-content">
       <div class="notif-icon">🎁</div>
@@ -36,22 +35,60 @@
     <button id="btn-accept-anyway" class="btn-accept">Accept</button>
   </div>
 
-  <!-- Main gift stage -->
+  <!-- Main stage -->
   <div id="stage" class="stage hidden">
-    <!-- Gift Box -->
+    <!-- Pure CSS Gift Box -->
     <div id="gift-box" class="gift-box">
-      <img src="assets/gift-box.png" alt="Pink Gift Box" class="box-img">
+      <div class="box">
+        <div class="box-face front"></div>
+        <div class="box-face back"></div>
+        <div class="box-face left"></div>
+        <div class="box-face right"></div>
+        <div class="box-face bottom"></div>
+      </div>
+      <div class="lid">
+        <div class="lid-face top"></div>
+        <div class="lid-face front"></div>
+        <div class="lid-face back"></div>
+        <div class="lid-face left"></div>
+        <div class="lid-face right"></div>
+      </div>
+      <div class="ribbon-v"></div>
+      <div class="ribbon-h"></div>
+      <div class="bow">
+        <div class="loop left"></div>
+        <div class="loop right"></div>
+        <div class="knot"></div>
+        <div class="tail left"></div>
+        <div class="tail right"></div>
+      </div>
       <div class="tap-hint">Tap to open ✨</div>
     </div>
 
-    <!-- Gifts that appear after opening -->
+    <!-- Gifts after box opens -->
     <div id="gifts" class="gifts hidden">
       <div id="bouquet-container" class="gift-item">
-        <img src="assets/bouquet.jpg" alt="Flower Bouquet" class="bouquet-img">
+        <div class="mini-bouquet">
+          <div class="petal p1"></div>
+          <div class="petal p2"></div>
+          <div class="petal p3"></div>
+          <div class="petal p4"></div>
+          <div class="petal p5"></div>
+          <div class="center"></div>
+          <div class="leaf lf1"></div>
+          <div class="leaf lf2"></div>
+          <div class="stem-line"></div>
+          <div class="mini-ribbon"></div>
+        </div>
         <div class="gift-label">For you 🌸</div>
       </div>
+
       <div id="envelope-container" class="gift-item">
-        <img src="assets/envelope.jpg" alt="Floral Envelope" class="envelope-img">
+        <div class="mini-envelope">
+          <div class="m-body"></div>
+          <div class="m-flap"></div>
+          <div class="m-bow"></div>
+        </div>
         <div class="gift-label">A letter 💌</div>
       </div>
     </div>
@@ -60,19 +97,31 @@
   <!-- Flower zoom overlay -->
   <div id="flower-overlay" class="overlay hidden">
     <div class="overlay-content flower-content">
-      <img src="assets/bouquet.jpg" alt="Bouquet" class="zoomed-bouquet">
+      <div class="big-bouquet">
+        <div class="b-flower bf1"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
+        <div class="b-flower bf2"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
+        <div class="b-flower bf3"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
+        <div class="b-flower bf4"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
+        <div class="b-flower bf5"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
+        <div class="b-leaf bl1"></div>
+        <div class="b-leaf bl2"></div>
+        <div class="b-leaf bl3"></div>
+        <div class="b-stem"></div>
+        <div class="b-ribbon"></div>
+      </div>
       <div class="butterflies"></div>
       <div class="sparkles"></div>
       <button class="close-btn" data-close="flower">✕</button>
     </div>
   </div>
 
-  <!-- Envelope + Letter overlay -->
+  <!-- Envelope + Letter -->
   <div id="envelope-overlay" class="overlay hidden">
     <div class="overlay-content envelope-content">
-      <div id="envelope-open" class="envelope-wrapper">
-        <img src="assets/envelope.jpg" alt="Envelope" class="envelope-closed">
-        <div class="envelope-flap"></div>
+      <div id="big-envelope" class="big-envelope">
+        <div class="be-body"></div>
+        <div class="be-flap"></div>
+        <div class="be-bow"></div>
       </div>
       <div id="letter" class="letter hidden">
         <div class="letter-paper">
@@ -89,7 +138,7 @@
     </div>
   </div>
 
-  <!-- Receipt overlay -->
+  <!-- Receipt -->
   <div id="receipt-overlay" class="overlay hidden">
     <div class="overlay-content receipt-content">
       <div class="receipt">
@@ -106,19 +155,9 @@
     </div>
   </div>
 
-  <!-- Audio elements -->
-  <!-- 
-    IMPORTANT: Replace the src of #bg-music with your own "Slide Away - Oasis.mp3" file
-    Place the mp3 inside the sounds/ folder and update the path below.
-    Current track is a soft royalty-free romantic piano (very soft volume).
-  -->
   <audio id="bg-music" loop preload="auto">
-    <!-- Placeholder - user should replace with Slide Away -->
     <source src="sounds/ambient.mp3" type="audio/mpeg">
   </audio>
-  <audio id="sfx-unwrap" preload="auto"></audio>
-  <audio id="sfx-sparkle" preload="auto"></audio>
-  <audio id="sfx-paper" preload="auto"></audio>
 
   <script src="js/script.js"></script>
 </body>
