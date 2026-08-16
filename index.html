@@ -14,7 +14,7 @@
 <body>
   <div class="bg"></div>
 
-  <!-- iPhone-style Notification -->
+  <!-- iPhone Notification -->
   <div id="notification" class="notification">
     <div class="notif-content">
       <div class="notif-icon">🎁</div>
@@ -37,59 +37,24 @@
 
   <!-- Main stage -->
   <div id="stage" class="stage hidden">
-    <!-- Pure CSS Gift Box -->
+    <!-- Gift Box (image) -->
     <div id="gift-box" class="gift-box">
-      <div class="box">
-        <div class="box-face front"></div>
-        <div class="box-face back"></div>
-        <div class="box-face left"></div>
-        <div class="box-face right"></div>
-        <div class="box-face bottom"></div>
-      </div>
-      <div class="lid">
-        <div class="lid-face top"></div>
-        <div class="lid-face front"></div>
-        <div class="lid-face back"></div>
-        <div class="lid-face left"></div>
-        <div class="lid-face right"></div>
-      </div>
-      <div class="ribbon-v"></div>
-      <div class="ribbon-h"></div>
-      <div class="bow">
-        <div class="loop left"></div>
-        <div class="loop right"></div>
-        <div class="knot"></div>
-        <div class="tail left"></div>
-        <div class="tail right"></div>
-      </div>
+      <img src="assets/gift-box.png" alt="Gift Box" class="box-img">
       <div class="tap-hint">Tap to open ✨</div>
     </div>
 
-    <!-- Gifts after box opens -->
-    <div id="gifts" class="gifts hidden">
-      <div id="bouquet-container" class="gift-item">
-        <div class="mini-bouquet">
-          <div class="petal p1"></div>
-          <div class="petal p2"></div>
-          <div class="petal p3"></div>
-          <div class="petal p4"></div>
-          <div class="petal p5"></div>
-          <div class="center"></div>
-          <div class="leaf lf1"></div>
-          <div class="leaf lf2"></div>
-          <div class="stem-line"></div>
-          <div class="mini-ribbon"></div>
-        </div>
-        <div class="gift-label">For you 🌸</div>
-      </div>
+    <!-- Confetti container -->
+    <div id="confetti" class="confetti-container"></div>
 
-      <div id="envelope-container" class="gift-item">
-        <div class="mini-envelope">
-          <div class="m-body"></div>
-          <div class="m-flap"></div>
-          <div class="m-bow"></div>
+    <!-- Gifts: Flower big + Envelope at the foot -->
+    <div id="gifts" class="gifts hidden">
+      <div class="gifts-wrapper">
+        <div id="bouquet-container" class="bouquet-wrap">
+          <img src="assets/bouquet.png" alt="Flower Bouquet" class="bouquet-img">
         </div>
-        <div class="gift-label">A letter 💌</div>
+        <div id="envelope-container" class="envelope-wrap">
+          <img src="assets/envelope.png" alt="Envelope" class="envelope-img">
+        </div>
       </div>
     </div>
   </div>
@@ -97,31 +62,18 @@
   <!-- Flower zoom overlay -->
   <div id="flower-overlay" class="overlay hidden">
     <div class="overlay-content flower-content">
-      <div class="big-bouquet">
-        <div class="b-flower bf1"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
-        <div class="b-flower bf2"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
-        <div class="b-flower bf3"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
-        <div class="b-flower bf4"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
-        <div class="b-flower bf5"><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bp"></div><div class="bc"></div></div>
-        <div class="b-leaf bl1"></div>
-        <div class="b-leaf bl2"></div>
-        <div class="b-leaf bl3"></div>
-        <div class="b-stem"></div>
-        <div class="b-ribbon"></div>
-      </div>
+      <img src="assets/bouquet.png" alt="Bouquet" class="zoomed-bouquet">
       <div class="butterflies"></div>
       <div class="sparkles"></div>
       <button class="close-btn" data-close="flower">✕</button>
     </div>
   </div>
 
-  <!-- Envelope + Letter -->
+  <!-- Envelope + Letter overlay -->
   <div id="envelope-overlay" class="overlay hidden">
     <div class="overlay-content envelope-content">
       <div id="big-envelope" class="big-envelope">
-        <div class="be-body"></div>
-        <div class="be-flap"></div>
-        <div class="be-bow"></div>
+        <img src="assets/envelope.png" alt="Envelope" class="big-env-img">
       </div>
       <div id="letter" class="letter hidden">
         <div class="letter-paper">

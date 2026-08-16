@@ -1,9 +1,10 @@
-// ===== DOM Elements =====
+// ===== DOM =====
 const notification = document.getElementById('notification');
 const declineMsg = document.getElementById('decline-msg');
 const stage = document.getElementById('stage');
 const giftBox = document.getElementById('gift-box');
 const gifts = document.getElementById('gifts');
+const confettiContainer = document.getElementById('confetti');
 const bouquetContainer = document.getElementById('bouquet-container');
 const envelopeContainer = document.getElementById('envelope-container');
 const flowerOverlay = document.getElementById('flower-overlay');
@@ -17,13 +18,11 @@ const btnAccept = document.getElementById('btn-accept');
 const btnDecline = document.getElementById('btn-decline');
 const btnAcceptAnyway = document.getElementById('btn-accept-anyway');
 
-// ===== Soft SFX via Web Audio =====
+// ===== Soft SFX =====
 let audioCtx = null;
 
 function getAudioCtx() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   return audioCtx;
 }
 
@@ -43,10 +42,10 @@ function playTone(freq, type, duration, volume = 0.08) {
   } catch (e) {}
 }
 
-function playUnwrap() {
-  playTone(180, 'sine', 0.15, 0.06);
-  setTimeout(() => playTone(320, 'triangle', 0.25, 0.05), 80);
-  setTimeout(() => playTone(420, 'sine', 0.3, 0.04), 180);
+function playBoink() {
+  playTone(220, 'sine', 0.12, 0.07);
+  setTimeout(() => playTone(380, 'triangle', 0.18, 0.05), 70);
+  setTimeout(() => playTone(520, 'sine', 0.2, 0.04), 140);
 }
 
 function playSparkle() {
@@ -62,8 +61,46 @@ function playPaper() {
 
 // ===== Music =====
 function startMusic() {
-  bgMusic.volume = 0.18; // very soft
+  bgMusic.volume = 0.18;
   bgMusic.play().catch(() => {});
+}
+
+// ===== Confetti =====
+function createConfetti() {
+  const colors = ['#ff6b8a', '#ff8fab', '#ffb6c8', '#ffe066', '#ff9ecd', '#fff0f5', '#ff5c85'];
+  const count = 55;
+
+  for (let i = 0; i < count; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.left = (40 + Math.random() * 20) + '%';
+    piece.style.top = (35 + Math.random() * 15) + '%';
+
+    const tx = (Math.random() - 0.5) * 420;
+    const ty = 350 + Math.random() * 280;
+    const rot = (Math.random() - 0.5) * 720;
+    const delay = Math.random() * 0.25;
+    const duration = 1.1 + Math.random() * 0.9;
+
+    piece.style.setProperty('--tx', tx + 'px');
+    piece.style.setProperty('--ty', ty + 'px');
+    piece.style.setProperty('--rot', rot + 'deg');
+    piece.style.animation = `confettiFall ${duration}s ease-out ${delay}s forwards`;
+
+    // random size & shape
+    const size = 6 + Math.random() * 8;
+    piece.style.width = size + 'px';
+    piece.style.height = (size * 0.6) + 'px';
+    if (Math.random() > 0.6) piece.style.borderRadius = '50%';
+
+    confettiContainer.appendChild(piece);
+  }
+
+  // cleanup
+  setTimeout(() => {
+    confettiContainer.innerHTML = '';
+  }, 2200);
 }
 
 // ===== Notification =====
@@ -94,18 +131,21 @@ function acceptPackage() {
   }, 450);
 }
 
-// ===== Gift Box open =====
+// ===== Gift Box → Boink + Confetti =====
 giftBox.addEventListener('click', () => {
-  if (giftBox.classList.contains('opening')) return;
-  giftBox.classList.add('opening');
-  playUnwrap();
+  if (giftBox.classList.contains('boink')) return;
 
+  giftBox.classList.add('boink');
+  playBoink();
+  createConfetti();
+
+  // after boink finishes, show gifts
   setTimeout(() => {
     giftBox.style.display = 'none';
     gifts.classList.remove('hidden');
     void gifts.offsetWidth;
     gifts.classList.add('show');
-  }, 900);
+  }, 520);
 });
 
 // ===== Flower =====
@@ -128,7 +168,7 @@ function createButterfliesAndSparkles() {
     const b = document.createElement('div');
     b.className = 'butterfly';
     b.textContent = emojis[i % emojis.length];
-    b.style.left = (10 + Math.random() * 80) + '%';
+    b.style.left = (8 + Math.random() * 84) + '%';
     b.style.top = (5 + Math.random() * 80) + '%';
     b.style.animationDelay = (Math.random() * 2.5) + 's';
     b.style.animationDuration = (3.2 + Math.random() * 2.2) + 's';
@@ -158,8 +198,8 @@ envelopeContainer.addEventListener('click', () => {
       letter.classList.remove('hidden');
       void letter.offsetWidth;
       letter.classList.add('show');
-    }, 500);
-  }, 300);
+    }, 450);
+  }, 250);
 });
 
 // ===== Close handlers =====
@@ -194,7 +234,7 @@ document.querySelectorAll('[data-close]').forEach(btn => {
   });
 });
 
-// Prevent zoom on double-tap
+// Prevent double-tap zoom
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 
