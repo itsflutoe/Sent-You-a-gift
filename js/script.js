@@ -183,6 +183,8 @@ function createButterfliesAndSparkles() {
     s.style.animationDelay = (Math.random() * 2) + 's';
     sparkles.appendChild(s);
   }
+}
+
 // ===== Envelope + Letter =====
 envelopeContainer.addEventListener('click', () => {
   playPaper();
