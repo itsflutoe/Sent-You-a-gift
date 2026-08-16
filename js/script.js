@@ -183,8 +183,6 @@ function createButterfliesAndSparkles() {
     s.style.animationDelay = (Math.random() * 2) + 's';
     sparkles.appendChild(s);
   }
-}
-
 // ===== Envelope + Letter =====
 envelopeContainer.addEventListener('click', () => {
   playPaper();
@@ -202,35 +200,35 @@ envelopeContainer.addEventListener('click', () => {
   }, 250);
 });
 
-// ===== Close handlers =====
-document.querySelectorAll('[data-close]').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const target = e.currentTarget.dataset.close;
+// Click the letter itself → show receipt
+letter.addEventListener('click', () => {
+  if (!letter.classList.contains('show')) return;
+  envelopeOverlay.classList.remove('show');
+  setTimeout(() => {
+    envelopeOverlay.classList.add('hidden');
+    letter.classList.remove('show');
+    letter.classList.add('hidden');
+    bigEnvelope.classList.remove('opened');
+    // show receipt
+    receiptOverlay.classList.remove('hidden');
+    void receiptOverlay.offsetWidth;
+    receiptOverlay.classList.add('show');
+    playSparkle();
+  }, 400);
+});
 
-    if (target === 'flower') {
-      flowerOverlay.classList.remove('show');
-      setTimeout(() => flowerOverlay.classList.add('hidden'), 400);
-    }
+// Click the receipt → close it
+receiptOverlay.addEventListener('click', (e) => {
+  // only close if clicking the receipt area or the overlay
+  receiptOverlay.classList.remove('show');
+  setTimeout(() => receiptOverlay.classList.add('hidden'), 400);
+});
 
-    if (target === 'letter') {
-      envelopeOverlay.classList.remove('show');
-      setTimeout(() => {
-        envelopeOverlay.classList.add('hidden');
-        letter.classList.remove('show');
-        letter.classList.add('hidden');
-        bigEnvelope.classList.remove('opened');
-        // show receipt
-        receiptOverlay.classList.remove('hidden');
-        void receiptOverlay.offsetWidth;
-        receiptOverlay.classList.add('show');
-        playSparkle();
-      }, 450);
-    }
-
-    if (target === 'receipt') {
-      receiptOverlay.classList.remove('show');
-      setTimeout(() => receiptOverlay.classList.add('hidden'), 400);
-    }
+// Flower close button still works
+document.querySelectorAll('[data-close="flower"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    flowerOverlay.classList.remove('show');
+    setTimeout(() => flowerOverlay.classList.add('hidden'), 400);
   });
 });
 

@@ -254,7 +254,7 @@ html, body {
 .bouquet-wrap:active { transform: scale(0.96); }
 
 .bouquet-img {
-  width: min(78vw, 300px);
+  width: min(92vw, 360px);
   height: auto;
   display: block;
   filter: drop-shadow(0 12px 25px rgba(0,0,0,0.3));
@@ -263,7 +263,7 @@ html, body {
 /* Envelope sits at the foot of the flower */
 .envelope-wrap {
   position: relative;
-  margin-top: -55px;          /* pulls it up under the stems */
+  margin-top: -85px;          /* pulls it up to intersect the lower stems */
   z-index: 3;
   cursor: pointer;
   transition: transform 0.25s;
@@ -272,7 +272,7 @@ html, body {
 .envelope-wrap:active { transform: scale(0.95); }
 
 .envelope-img {
-  width: min(48vw, 180px);
+  width: min(52vw, 195px);
   height: auto;
   display: block;
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.28));
@@ -313,7 +313,7 @@ html, body {
 }
 
 .zoomed-bouquet {
-  width: min(88vw, 340px);
+  width: min(92vw, 360px);
   height: auto;
   filter: drop-shadow(0 15px 40px rgba(0,0,0,0.4));
 }
@@ -363,6 +363,7 @@ html, body {
 
 /* Letter */
 .letter {
+  cursor: pointer;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -437,6 +438,7 @@ html, body {
 .receipt-content { animation: popIn 0.5s ease; }
 
 .receipt {
+  cursor: pointer;
   background: linear-gradient(180deg, #fffaf7 0%, #fff0eb 100%);
   width: min(88vw, 320px);
   border-radius: 12px;
