@@ -8,16 +8,16 @@ const bouquetContainer = document.getElementById('bouquet-container');
 const envelopeContainer = document.getElementById('envelope-container');
 const flowerOverlay = document.getElementById('flower-overlay');
 const envelopeOverlay = document.getElementById('envelope-overlay');
+const bigEnvelope = document.getElementById('big-envelope');
 const letter = document.getElementById('letter');
 const receiptOverlay = document.getElementById('receipt-overlay');
 const bgMusic = document.getElementById('bg-music');
 
-// Buttons
 const btnAccept = document.getElementById('btn-accept');
 const btnDecline = document.getElementById('btn-decline');
 const btnAcceptAnyway = document.getElementById('btn-accept-anyway');
 
-// ===== Audio helpers (Web Audio for soft SFX – no external files needed) =====
+// ===== Soft SFX via Web Audio =====
 let audioCtx = null;
 
 function getAudioCtx() {
@@ -44,7 +44,6 @@ function playTone(freq, type, duration, volume = 0.08) {
 }
 
 function playUnwrap() {
-  // soft rising + soft click
   playTone(180, 'sine', 0.15, 0.06);
   setTimeout(() => playTone(320, 'triangle', 0.25, 0.05), 80);
   setTimeout(() => playTone(420, 'sine', 0.3, 0.04), 180);
@@ -61,26 +60,18 @@ function playPaper() {
   setTimeout(() => playTone(180, 'sine', 0.35, 0.04), 100);
 }
 
-// ===== Background Music =====
+// ===== Music =====
 function startMusic() {
-  // Volume very soft as requested
-  bgMusic.volume = 0.18;
-  bgMusic.play().catch(() => {
-    // Autoplay blocked – will start on next interaction
-  });
+  bgMusic.volume = 0.18; // very soft
+  bgMusic.play().catch(() => {});
 }
 
 // ===== Notification =====
 function showNotification() {
-  setTimeout(() => {
-    notification.classList.add('show');
-  }, 400);
+  setTimeout(() => notification.classList.add('show'), 400);
 }
 
-btnAccept.addEventListener('click', () => {
-  acceptPackage();
-});
-
+btnAccept.addEventListener('click', acceptPackage);
 btnDecline.addEventListener('click', () => {
   notification.classList.remove('show');
   setTimeout(() => {
@@ -88,7 +79,6 @@ btnDecline.addEventListener('click', () => {
     declineMsg.classList.remove('hidden');
   }, 400);
 });
-
 btnAcceptAnyway.addEventListener('click', () => {
   declineMsg.classList.add('hidden');
   acceptPackage();
@@ -99,12 +89,8 @@ function acceptPackage() {
   setTimeout(() => {
     notification.style.display = 'none';
     stage.classList.remove('hidden');
-    // start music after user gesture
     startMusic();
-    // show gift box with delay
-    setTimeout(() => {
-      giftBox.classList.add('show');
-    }, 300);
+    setTimeout(() => giftBox.classList.add('show'), 300);
   }, 450);
 }
 
@@ -117,17 +103,15 @@ giftBox.addEventListener('click', () => {
   setTimeout(() => {
     giftBox.style.display = 'none';
     gifts.classList.remove('hidden');
-    // force reflow then show
     void gifts.offsetWidth;
     gifts.classList.add('show');
-  }, 700);
+  }, 900);
 });
 
 // ===== Flower =====
 bouquetContainer.addEventListener('click', () => {
   playSparkle();
   flowerOverlay.classList.remove('hidden');
-  // force reflow
   void flowerOverlay.offsetWidth;
   flowerOverlay.classList.add('show');
   createButterfliesAndSparkles();
@@ -139,24 +123,24 @@ function createButterfliesAndSparkles() {
   butterflies.innerHTML = '';
   sparkles.innerHTML = '';
 
-  const butterflyEmojis = ['🦋', '🦋', '🦋', '✨'];
-  for (let i = 0; i < 6; i++) {
+  const emojis = ['🦋', '🦋', '🦋', '✨', '🌸'];
+  for (let i = 0; i < 7; i++) {
     const b = document.createElement('div');
     b.className = 'butterfly';
-    b.textContent = butterflyEmojis[i % butterflyEmojis.length];
-    b.style.left = (15 + Math.random() * 70) + '%';
-    b.style.top = (10 + Math.random() * 70) + '%';
-    b.style.animationDelay = (Math.random() * 2) + 's';
-    b.style.animationDuration = (3.5 + Math.random() * 2) + 's';
+    b.textContent = emojis[i % emojis.length];
+    b.style.left = (10 + Math.random() * 80) + '%';
+    b.style.top = (5 + Math.random() * 80) + '%';
+    b.style.animationDelay = (Math.random() * 2.5) + 's';
+    b.style.animationDuration = (3.2 + Math.random() * 2.2) + 's';
     butterflies.appendChild(b);
   }
 
-  for (let i = 0; i < 18; i++) {
+  for (let i = 0; i < 20; i++) {
     const s = document.createElement('div');
     s.className = 'sparkle';
     s.style.left = (Math.random() * 100) + '%';
     s.style.top = (Math.random() * 100) + '%';
-    s.style.animationDelay = (Math.random() * 1.8) + 's';
+    s.style.animationDelay = (Math.random() * 2) + 's';
     sparkles.appendChild(s);
   }
 }
@@ -168,14 +152,14 @@ envelopeContainer.addEventListener('click', () => {
   void envelopeOverlay.offsetWidth;
   envelopeOverlay.classList.add('show');
 
-  // open envelope then show letter
-  const wrapper = document.getElementById('envelope-open');
   setTimeout(() => {
-    wrapper.classList.add('opened');
-    letter.classList.remove('hidden');
-    void letter.offsetWidth;
-    letter.classList.add('show');
-  }, 400);
+    bigEnvelope.classList.add('opened');
+    setTimeout(() => {
+      letter.classList.remove('hidden');
+      void letter.offsetWidth;
+      letter.classList.add('show');
+    }, 500);
+  }, 300);
 });
 
 // ===== Close handlers =====
@@ -189,12 +173,12 @@ document.querySelectorAll('[data-close]').forEach(btn => {
     }
 
     if (target === 'letter') {
-      // go to receipt
       envelopeOverlay.classList.remove('show');
       setTimeout(() => {
         envelopeOverlay.classList.add('hidden');
         letter.classList.remove('show');
         letter.classList.add('hidden');
+        bigEnvelope.classList.remove('opened');
         // show receipt
         receiptOverlay.classList.remove('hidden');
         void receiptOverlay.offsetWidth;
@@ -205,14 +189,12 @@ document.querySelectorAll('[data-close]').forEach(btn => {
 
     if (target === 'receipt') {
       receiptOverlay.classList.remove('show');
-      setTimeout(() => {
-        receiptOverlay.classList.add('hidden');
-      }, 400);
+      setTimeout(() => receiptOverlay.classList.add('hidden'), 400);
     }
   });
 });
 
-// Prevent double-tap zoom on iOS
+// Prevent zoom on double-tap
 document.addEventListener('gesturestart', e => e.preventDefault());
 document.addEventListener('dblclick', e => e.preventDefault());
 
