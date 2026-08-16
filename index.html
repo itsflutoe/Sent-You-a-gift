@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Special Delivery for Lily 💖</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg"></div>
+
+  <!-- iPhone Notification -->
+  <div id="notification" class="notification">
+    <div class="notif-content">
+      <div class="notif-icon">🎁</div>
+      <div class="notif-text">
+        <div class="notif-app">Special Delivery</div>
+        <div class="notif-msg">A package has arrived 🎁 Do you want to accept it?</div>
+      </div>
+    </div>
+    <div class="notif-buttons">
+      <button id="btn-decline" class="btn-decline">Decline</button>
+      <button id="btn-accept" class="btn-accept">Accept</button>
+    </div>
+  </div>
+
+  <!-- Decline message -->
+  <div id="decline-msg" class="decline-msg hidden">
+    <p>It should be accepted no matter what 🥺</p>
+    <button id="btn-accept-anyway" class="btn-accept">Accept</button>
+  </div>
+
+  <!-- Main stage -->
+  <div id="stage" class="stage hidden">
+    <!-- Gift Box (image) -->
+    <div id="gift-box" class="gift-box">
+      <img src="assets/gift-box.png" alt="Gift Box" class="box-img">
+      <div class="tap-hint">Tap to open ✨</div>
+    </div>
+
+    <!-- Confetti container -->
+    <div id="confetti" class="confetti-container"></div>
+
+    <!-- Gifts: Flower big + Envelope at the foot -->
+    <div id="gifts" class="gifts hidden">
+      <div class="gifts-wrapper">
+        <div id="bouquet-container" class="bouquet-wrap">
+          <img src="assets/bouquet.png" alt="Flower Bouquet" class="bouquet-img">
+        </div>
+        <div id="envelope-container" class="envelope-wrap">
+          <img src="assets/envelope.png" alt="Envelope" class="envelope-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flower zoom overlay -->
+  <div id="flower-overlay" class="overlay hidden">
+    <div class="overlay-content flower-content">
+      <img src="assets/bouquet.png" alt="Bouquet" class="zoomed-bouquet">
+      <div class="butterflies"></div>
+      <div class="sparkles"></div>
+      <button class="close-btn" data-close="flower">✕</button>
+    </div>
+  </div>
+
+  <!-- Envelope + Letter overlay -->
+  <div id="envelope-overlay" class="overlay hidden">
+    <div class="overlay-content envelope-content">
+      <div id="big-envelope" class="big-envelope">
+        <img src="assets/envelope.png" alt="Envelope" class="big-env-img">
+      </div>
+      <div id="letter" class="letter hidden">
+        <div class="letter-paper">
+          <p class="letter-to">To my lily,</p>
+          <p>Hi babe, its already 2 months na since sinagot mo ako hehe ILY!</p>
+          <p>I want you to know na sobrang mahal kita at di ako mapapagod na mahalin ka. I hope never mo maisip na di na kita mahal or i dont like you as much as i like u before. Wala pong nagbago sa feelings ko for u, di sya nag fade or nawala but it became more intense hwahw what? I love you more than you will ever know.</p>
+          <p>Thankyou so much for the chance u have given me, kagaya ng sinasabi ko palagi di ko sasayangin to. For the past 2 months we've been through many things na din and i can say na its making us ready for the future we want and we will have. Seeing you happy makes me happy too thats why i'll make sure na gagawin ko best ko to make you happy and feel loved the way you deserve.</p>
+          <p>Mahirap yung situation natin right now and i know even ikaw nahihirapan din pero willing akong ulitin lahat ng to 100x if it means i'll end with you. I will do my best to be better for me, for you para masure ko na makukuha ko yung future na want ko for us. salamat sa tiwala mo palagi at sa tulong ikaw yung reason why kinakaya ko lahat ngayon ng nangyayare sa buhay ko huhu.</p>
+          <p class="letter-end">Lily, I Love You.<br>Always in all ways.</p>
+          <p class="letter-sign">your cha &lt;3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Receipt -->
+  <div id="receipt-overlay" class="overlay hidden">
+    <div class="overlay-content receipt-content">
+      <div class="receipt">
+        <div class="receipt-header">💕 Delivery Receipt 💕</div>
+        <div class="receipt-row"><span>Sender:</span> <strong>charlie</strong></div>
+        <div class="receipt-row"><span>Pick-up point:</span> <strong>My heart</strong></div>
+        <div class="receipt-row"><span>Receiver:</span> <strong>Lily</strong></div>
+        <div class="receipt-row"><span>Drop off:</span> <strong>Your front door</strong></div>
+        <div class="receipt-divider"></div>
+        <div class="receipt-row cod"><span>COD:</span> <strong>1 Hour Hug and 10 kisses</strong></div>
+        <div class="receipt-footer">Thank you for accepting 💖<br>Always yours</div>
+      </div>
+      <button class="close-btn" data-close="receipt">Close</button>
+    </div>
+  </div>
+
+  <audio id="bg-music" loop preload="auto">
+    <source src="sounds/ambient.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
